@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { useState, useRef, useContext, } from "react";
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // import axios from 'axios';
 import classes from "./AuthForm.module.css";
 import AuthContext from '../../Store/AuthContext';
@@ -11,7 +11,7 @@ import AuthContext from '../../Store/AuthContext';
 export default function AuthForm(props) {
     const AuthCtx=useContext(AuthContext);
     // const cartCtx=useContext(CartContext);
-    // const history= useNavigate()
+    const navigate= useNavigate()
 
   const [isLoading, setIsLoading] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
@@ -71,7 +71,7 @@ export default function AuthForm(props) {
       
       AuthCtx.autoLogout();
       // console.log(data.idToken);
-    //   history('/');
+    navigate('/loggedin')
      })
 
     .catch((err)=>{
