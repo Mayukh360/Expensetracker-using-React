@@ -55,6 +55,7 @@ export default function AuthForm(props) {
     }).then((response) => {
       setIsLoading(false);
       if (response.ok) {
+        console.log('User Successfully Login');
         return response.json();
       } else {
         //The responde holds error
@@ -81,7 +82,7 @@ export default function AuthForm(props) {
     alert('Wrong password');
   }
 }
-console.log(isLogin);
+
 
   return (<Fragment>
     {!AuthCtx.isLoggedIn && <section className={classes.auth}>
