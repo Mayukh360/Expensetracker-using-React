@@ -23,6 +23,7 @@ export default function AuthContextProvider(props)  {
     const userIsLoggedIn= !!token;
 
     const loginhandler=(token)=>{
+      console.log('logged In');
         setToken(token);
         localStorage.setItem('token', token);
     }
