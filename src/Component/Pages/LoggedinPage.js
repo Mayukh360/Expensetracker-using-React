@@ -34,14 +34,16 @@ export default function LoggedinPage() {
   }
 
   const verificationMessage = isEmailVerified ? (
-    <h2>Email is verified</h2>
+    <h3>Email is verified</h3>
   ) : <p>Email is not verified</p>;
 
   return (
     <div>
       <h2>You are logged in successfully</h2>
-      <Link to="/updateprofile">Update</Link>
+      <Link to="/updateprofile">Click here to Update Profile</Link><br/>
+      <h2>Click Here to Verify Email</h2>
       <button onClick={verifyHandler}>Verify Email</button>
+      
       {verificationMessage}
     </div>
   );
