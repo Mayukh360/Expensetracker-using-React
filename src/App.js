@@ -4,9 +4,12 @@ import LoggedinPage from "./Component/Pages/LoggedinPage";
 import UpdateProfile from "./Component/Pages/UpdateProfile";
 import Navbar from "./Component/Navbar/Navbar";
 import ExpenseTracker from "./Component/Pages/ExpenseTracker";
+import { useContext } from "react";
+import AuthContext from "./Store/AuthContext";
 
 
 function App() {
+  const authCtx=useContext(AuthContext);
   return (
     <div >
       <Navbar/>
@@ -15,7 +18,7 @@ function App() {
       <Route path="/" element={<AuthForm />} />
       <Route path="/loggedin" element={<LoggedinPage />} />
       <Route path="/updateprofile" element={<UpdateProfile/>} />
-      <Route path="/expensetracker" element={<ExpenseTracker/>} />
+     {authCtx.isLoggedIn ? ( <Route path="/expensetracker" element={<ExpenseTracker/>} />) :(<Route path="/expensetracker" element={<AuthForm/>} />)}
       </Routes>
     
     </div>

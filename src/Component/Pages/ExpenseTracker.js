@@ -1,10 +1,46 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState,useEffect } from "react";
 
 export default function ExpenseTracker() {
   const formRef = useRef();
   const [amount, setAmount] = useState();
   const [description, setDescription] = useState();
   const [category, setCategory] = useState();
+  const [expenses, setExpenses] = useState([]);
+
+  useEffect(() => {
+    // Fetch expenses data from Firebase Realtime Database
+    fetch("https://authanticate-form-default-rtdb.firebaseio.com/user/expenses.json")
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Failed to fetch expenses data");
+        }
+      })
+      .then((data) => {
+        // console.log(data);
+     //Update the data using setAmount and setDescription
+     const fetchedExpenses = [];
+        for (const key in data) {
+          fetchedExpenses.push({
+            id: key,
+            amount: data[key].amount,
+            description: data[key].description,
+            category: data[key].category
+          });
+        }
+        setExpenses(fetchedExpenses);
+        console.log(fetchedExpenses[0].amount);
+        // setAmount(fetchedExpenses[0].amount)
+        // setDescription(fetchedExpenses[0].description);
+        // setCategory(fetchedExpenses[0].category)
+      })
+      .catch((error) => {
+        console.log("Error occurred while fetching expenses data:", error);
+      });
+  }, []);
+
+
   const submitHandler = (event) => {
     event.preventDefault();
     const amountInput = formRef.current.elements.amount.value;
@@ -14,6 +50,37 @@ export default function ExpenseTracker() {
     setAmount(amountInput);
     setDescription(descriptionInput);
     setCategory(categoryInput);
+
+    const expenseData = {
+      amount: amountInput,
+      description: descriptionInput,
+      category: categoryInput
+    };
+
+    fetch(
+      "https://authanticate-form-default-rtdb.firebaseio.com/user/expenses.json",
+      {
+        method: "POST",
+        body: JSON.stringify(expenseData),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+    )
+      .then((response) => {
+        if (response.ok) {
+          console.log("Expense data saved successfully!");
+          // Perform any additional actions upon successful save
+        } else {
+          console.log("Failed to save expense data");
+          // Handle the error case
+        }
+      })
+      .catch((error) => {
+        console.log("Error occurred while saving expense data:", error);
+        // Handle the error case
+      });
+
   };
   return (
       <>
@@ -59,16 +126,16 @@ export default function ExpenseTracker() {
         </button>
       </form>
       <ul className="max-w-lg mx-auto mt-6">
-        {amount && description && category && (
-          <li className="bg-white shadow-md rounded p-4 mb-4">
+        {expenses.map((expense) => (
+          <li key={expense.id} className="bg-white shadow-md rounded p-4 mb-4">
             <span className="font-medium">Amount: </span>
-            {amount} |{" "}
+            {expense.amount} |{" "}
             <span className="font-medium">Description: </span>
-            {description} |{" "}
+            {expense.description} |{" "}
             <span className="font-medium">Category: </span>
-            {category}
+            {expense.category}
           </li>
-        )}
+        ))}
       </ul>
     </>
   );

@@ -36,6 +36,13 @@
     padding: 0.25rem;
   }
   
+.control input:focus {
+  outline: none;
+  background-color: #f39c9c;
+  border: 2px solid #ebebeb;
+  box-shadow: 0 0 5px rgba(56, 201, 174, 0.5);
+}
+  
   .actions {
     margin-top: 1.5rem;
     display: flex;
@@ -48,8 +55,8 @@
     font: inherit;
     color: white;
     background-color: #da0000;
-    border: 1px solid #4a8fb2;
-    border-radius: 4px;
+    border: 2px solid #fcfcfc;
+    border-radius: 10px;
     padding: 0.5rem 2.5rem;
   }
   

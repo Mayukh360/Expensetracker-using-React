@@ -42,7 +42,7 @@ export default function LoggedinPage() {
     <div className="logged-in-page bg-gray-100 min-h-screen flex flex-col items-center ">
      <div className="bg-white p-8 rounded shadow-md w-full mt-6">
       <h2 className="text-2xl mb-4">Visit Expense Tracker</h2>
-      <Link to="/expensetracker" className="text-blue-500 underline mb-4">Expense Tracker</Link>
+      <Link to="/expensetracker" className="text-blue-500 underline mb-4">Cick Here to Visit Expense Tracker</Link>
       </div>
       <div className="bg-white p-8 mt-4 rounded shadow-md w-full" >
         <h2 className="text-xl mb-4">You are logged in successfully</h2>
