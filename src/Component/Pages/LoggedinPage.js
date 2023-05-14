@@ -39,17 +39,19 @@ export default function LoggedinPage() {
   ) : <h4>Email is not verified</h4>;
 
   return (
-    <div className="logged-in-page">
-      <h2>Visit Expense Tracker</h2>
-      <Link to="/expensetracker">Expense Tracker</Link>
-      <li className='userlogged'>
-      <h2>You are logged in successfully</h2>
-      <Link to="/updateprofile">Click here to Update Profile</Link><br/>
-      </li>
-      <li className='verify'>
-      <h2>Click Here to Verify Email</h2>
-      <button onClick={verifyHandler}>Verify Email</button>
-      </li>
+    <div className="logged-in-page bg-gray-100 min-h-screen flex flex-col items-center ">
+     <div className="bg-white p-8 rounded shadow-md w-full mt-6">
+      <h2 className="text-2xl mb-4">Visit Expense Tracker</h2>
+      <Link to="/expensetracker" className="text-blue-500 underline mb-4">Expense Tracker</Link>
+      </div>
+      <div className="bg-white p-8 mt-4 rounded shadow-md w-full" >
+        <h2 className="text-xl mb-4">You are logged in successfully</h2>
+        <Link to="/updateprofile" className="text-blue-500 underline">Click here to Update Profile</Link><br/>
+      </div>
+      <div className="bg-white p-8 mt-4 rounded shadow-md w-full">
+        <h2 className="text-xl mb-4">Click Here to Verify Email</h2>
+        <button onClick={verifyHandler} className="bg-blue-500 text-white font-medium py-2 px-4 rounded hover:bg-blue-600">Verify Email</button>
+      </div>
       
       {verificationMessage}
     </div>
