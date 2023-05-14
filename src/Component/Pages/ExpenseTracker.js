@@ -2,9 +2,6 @@ import React, { useRef, useState,useEffect } from "react";
 
 export default function ExpenseTracker() {
   const formRef = useRef();
-  const [amount, setAmount] = useState();
-  const [description, setDescription] = useState();
-  const [category, setCategory] = useState();
   const [expenses, setExpenses] = useState([]);
 
   useEffect(() => {
@@ -47,9 +44,7 @@ export default function ExpenseTracker() {
     const descriptionInput = formRef.current.elements.description.value;
     const categoryInput = formRef.current.elements.category.value;
     console.log(amountInput, descriptionInput, categoryInput);
-    setAmount(amountInput);
-    setDescription(descriptionInput);
-    setCategory(categoryInput);
+    
 
     const expenseData = {
       amount: amountInput,
