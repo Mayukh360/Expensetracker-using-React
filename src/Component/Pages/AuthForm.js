@@ -24,6 +24,7 @@ export default function AuthForm(props) {
   };
   const submitHandler = (event) => {
     event.preventDefault();
+   
     const enteredEmail = emailInputRef.current.value;
     localStorage.setItem('email',enteredEmail);
     const enteredPassword = passwordInputRef.current.value;
@@ -55,7 +56,7 @@ export default function AuthForm(props) {
     }).then((response) => {
       setIsLoading(false);
       if (response.ok) {
-        console.log('User Successfully Login');
+        console.log('User Successfully Login',response);
         return response.json();
       } else {
         //The responde holds error
@@ -67,7 +68,7 @@ export default function AuthForm(props) {
       }
     })
     .then((data)=>{
-      console.log(AuthCtx);
+      // console.log(AuthCtx);
       AuthCtx.login(data.idToken);
       
       AuthCtx.autoLogout();

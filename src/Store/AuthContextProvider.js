@@ -12,7 +12,7 @@ export default function AuthContextProvider(props)  {
         console.log('You have been logged out');
         localStorage.removeItem('token');
         initialToken=null;
-      },200000)
+      },200000000)
     }
     useEffect(()=>{
       autoLogoutHandler();
@@ -23,7 +23,7 @@ export default function AuthContextProvider(props)  {
     const userIsLoggedIn= !!token;
 
     const loginhandler=(token)=>{
-      console.log('logged In');
+      // console.log('logged In');
         setToken(token);
         localStorage.setItem('token', token);
     }

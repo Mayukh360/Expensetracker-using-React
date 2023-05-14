@@ -1,6 +1,9 @@
-import React,{useRef,useEffect} from 'react'
+import React,{useRef,useEffect,useContext} from 'react';
+import AuthContext from '../../Store/AuthContext';
 
 export default function UpdateProfile() {
+  const authCtx=useContext(AuthContext);
+  
     const formRef=useRef();
     const token=localStorage.getItem('token');
     const submitHandler=(event)=>{
@@ -15,10 +18,10 @@ export default function UpdateProfile() {
         idToken:token,
         displayName: fullName,
         photoUrl: photoUrl,
-        deleteAttribute:["DISPLAY_NAME", "PHOTO_URL"],
+        // deleteAttribute:["DISPLAY_NAME", "PHOTO_URL"],
         returnSecureToken:true,
       };
- console.log(data);
+     console.log(data);
       fetch(
       'https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyDXx5szR2zhd9OQlqBegt7PJUE8RXQAqAk',
       {
@@ -32,7 +35,7 @@ export default function UpdateProfile() {
       .then((response) => response.json())
       .then((data) => {
         // Handle the response
-        console.log('Profile updated:', data);
+        console.log('Profile updated:', data); //This response does not contain displayName,photoUrl
       })
       .catch((error) => {
         console.error('Error updating profile:', error);
@@ -40,7 +43,7 @@ export default function UpdateProfile() {
     }
 
     async function fetchData(){
-        console.log("TOKEN",token);
+        // console.log("TOKEN",token);
         fetch('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyDXx5szR2zhd9OQlqBegt7PJUE8RXQAqAk',{
             method: 'POST',
            
@@ -52,12 +55,15 @@ export default function UpdateProfile() {
               }),
         })
         .then((response)=>{
-            console.log(response)
+            // console.log(response)
          return   response.json()
             
         })
         .then((data)=>{
-            console.log('Fetched Data',data);
+            console.log('Fetched Data',data);//This response does not contain displayName,photoUrl
+            // console.log(data.users[0].displayName);
+            formRef.current.elements.name.value=data.users[0].displayName;
+            formRef.current.elements.profilephoto.value=data.users[0].photoUrl;
         })
         .catch((error) => {
             console.error('Error updating profile:', error);
