@@ -40,6 +40,8 @@ export default function LoggedinPage() {
 
   return (
     <div className="logged-in-page">
+      <h2>Visit Expense Tracker</h2>
+      <Link to="/expensetracker">Expense Tracker</Link>
       <li className='userlogged'>
       <h2>You are logged in successfully</h2>
       <Link to="/updateprofile">Click here to Update Profile</Link><br/>

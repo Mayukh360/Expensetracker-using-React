@@ -92,9 +92,7 @@ export default function AuthForm(props) {
     fetch('https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyDXx5szR2zhd9OQlqBegt7PJUE8RXQAqAk',{
       method :'POST',
       body:JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
+    
     })
     .then((response)=>{
       console.log('Reset',response);
