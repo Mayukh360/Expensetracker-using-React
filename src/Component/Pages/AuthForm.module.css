@@ -78,3 +78,13 @@
     margin-top: 2rem;
     text-align: center;
   }
+
+  .forgot{
+    cursor: pointer;
+    font: inherit;
+    color: white;
+    background-color: #38c9ae;
+    border: 1px solid #4a8fb2;
+    border-radius: 4px;
+    padding: 0.5rem 2.5rem;
+  }

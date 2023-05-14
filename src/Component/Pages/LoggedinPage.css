@@ -1,0 +1,46 @@
+.logged-in-page {
+    padding: 20px;
+  }
+  
+  .logged-in-page h2 {
+    margin-bottom: 10px;
+  }
+  
+  .logged-in-page a {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .logged-in-page button {
+    background-color: #047e06;
+    color: #f2e7e7;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    margin-left: 5px;
+    border-radius: 10px; 
+  }
+  
+  .logged-in-page button:hover {
+    background-color: #555;
+   
+  }
+  
+  .logged-in-page h3 {
+    
+    color: green;
+  }
+  
+  .logged-in-page h4 {
+    color: red;
+  }
+  .userlogged{
+    display: flex;
+    background-color: aqua;
+  }
+  .verify{
+    display: flex;
+    margin-top: 1rem;
+    background-color: #e269cc;
+  }

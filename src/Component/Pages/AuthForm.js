@@ -13,6 +13,9 @@ export default function AuthForm(props) {
     // const cartCtx=useContext(CartContext);
     const navigate= useNavigate()
 
+  
+   
+
   const [isLoading, setIsLoading] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
   const emailInputRef = useRef();
@@ -26,6 +29,7 @@ export default function AuthForm(props) {
     event.preventDefault();
    
     const enteredEmail = emailInputRef.current.value;
+    
     localStorage.setItem('email',enteredEmail);
     const enteredPassword = passwordInputRef.current.value;
     const confirmPassword=confirmPasswordInputRef.current.value;
@@ -39,7 +43,7 @@ export default function AuthForm(props) {
     if (isLogin) {
       url =
         "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDXx5szR2zhd9OQlqBegt7PJUE8RXQAqAk";
-    } else {
+    } else  {
       url =
         "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDXx5szR2zhd9OQlqBegt7PJUE8RXQAqAk";
     }
@@ -81,9 +85,26 @@ export default function AuthForm(props) {
     })
   }
   else{
-    alert('Wrong password');
+    const data={
+      email: enteredEmail,
+      requestType:"PASSWORD_RESET",
+    }
+    fetch('https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyDXx5szR2zhd9OQlqBegt7PJUE8RXQAqAk',{
+      method :'POST',
+      body:JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response)=>{
+      console.log('Reset',response);
+    })
+    .catch((error)=>{
+      console.log(error);
+    })
   }
 }
+
 
 
   return (<Fragment>
@@ -126,7 +147,10 @@ export default function AuthForm(props) {
           {isLogin ? "Create new account" : "Login with existing account"}
         </button>
       </div>
+      <div className={classes.actions} ><button className={classes.forgot}  >Forgot Password</button></div>
     </form>
+    
+    
   </section> }
   {AuthCtx.isLoggedIn && <h2 className={classes.loggedInmessage}>You Are already logged in, Visit Product section to see our Products</h2>}
   </Fragment>

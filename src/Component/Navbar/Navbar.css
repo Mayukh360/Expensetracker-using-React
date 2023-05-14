@@ -1,0 +1,31 @@
+.navbar {
+    background-color: #141111;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .navbar a {
+    color: #1aff00; /* Set the desired color */
+    text-decoration: none; /* Remove underline */
+    margin-right: auto;
+  }
+  
+  .navbar a:hover {
+    color: #34d1f4; /* Set the color for hover state */
+  }
+  
+  
+  .navbar button {
+    background-color: #b91a1a;
+    color: #fff;
+    border: 2px solid rgb(211, 56, 169);
+    padding: 10px 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 10px; /* Add border-radius property to create rounded corners */
+  }
+  
+  .navbar button:hover {
+    background-color: #555;
+  }
+  

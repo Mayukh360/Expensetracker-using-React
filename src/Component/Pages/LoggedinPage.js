@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import './LoggedinPage.css';
 
 export default function LoggedinPage() {
   const email = localStorage.getItem('email');
@@ -35,14 +36,18 @@ export default function LoggedinPage() {
 
   const verificationMessage = isEmailVerified ? (
     <h3>Email is verified</h3>
-  ) : <p>Email is not verified</p>;
+  ) : <h4>Email is not verified</h4>;
 
   return (
-    <div>
+    <div className="logged-in-page">
+      <li className='userlogged'>
       <h2>You are logged in successfully</h2>
       <Link to="/updateprofile">Click here to Update Profile</Link><br/>
+      </li>
+      <li className='verify'>
       <h2>Click Here to Verify Email</h2>
       <button onClick={verifyHandler}>Verify Email</button>
+      </li>
       
       {verificationMessage}
     </div>
