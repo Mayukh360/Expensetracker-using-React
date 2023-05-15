@@ -30,10 +30,7 @@ export default function ExpenseTracker() {
           });
         }
         setExpenses(fetchedExpenses);
-        // console.log(fetchedExpenses[0].amount);
-        // setAmount(fetchedExpenses[0].amount)
-        // setDescription(fetchedExpenses[0].description);
-        // setCategory(fetchedExpenses[0].category)
+  
       })
       .catch((error) => {
         console.log("Error occurred while fetching expenses data:", error);
@@ -53,6 +50,7 @@ export default function ExpenseTracker() {
       description: descriptionInput,
       category: categoryInput,
     };
+    setExpenses((prevExpenses) => [...prevExpenses, expenseData]);
 
     await fetch(
       "https://authanticate-form-default-rtdb.firebaseio.com/user/expenses.json",
@@ -64,61 +62,7 @@ export default function ExpenseTracker() {
         },
       }
     );
-    // .then((response) => {
-    //   console.log('RESPONSE',response);
-    //   if (response.ok) {
-    //     console.log("Expense data saved successfully!");
-    //     // Perform any additional actions upon successful save
-    //   } else {
-    //     console.log("Failed to save expense data");
-    //     // Handle the error case
-    //   }
-
-    // })
-    // .then((data) => {
-    //   console.log('NORMAL DATA',data);
-    //   // const fetchedExpenses = [];
-    //   // for (const key in data) {
-    //   //   fetchedExpenses.push({
-    //   //     id: key,
-    //   //     amount: data[key].amount,
-    //   //     description: data[key].description,
-    //   //     category: data[key].category
-    //   //   });
-    //   // }
-    //   // setExpenses(fetchedExpenses);
-    // })
-    // .catch((error) => {
-    //   console.log("Error occurred while saving expense data:", error);
-    //   // Handle the error case
-    // });
-
-    fetch(
-      "https://authanticate-form-default-rtdb.firebaseio.com/user/expenses.json"
-    )
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Failed to fetch expenses data");
-        }
-      })
-      .then((data) => {
-        
-        const fetchedExpenses = [];
-        for (const key in data) {
-          fetchedExpenses.push({
-            id: key,
-            amount: data[key].amount,
-            description: data[key].description,
-            category: data[key].category,
-          });
-        }
-        setExpenses(fetchedExpenses);
-      })
-      .catch((error) => {
-        console.log("Error occurred while fetching expenses data:", error);
-      });
+   
   }
 
   const dltbtnHandler = (expenseId) => {
