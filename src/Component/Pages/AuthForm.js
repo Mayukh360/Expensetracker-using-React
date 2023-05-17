@@ -1,17 +1,23 @@
-import React, { Fragment } from 'react';
+import React, { Fragment,useEffect } from 'react';
 import { useState, useRef, useContext, } from "react";
 import { useNavigate } from 'react-router-dom';
 // import axios from 'axios';
 import classes from "./AuthForm.module.css";
 import AuthContext from '../../Store/AuthContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { authActions } from '../../storee/AuthReducer';
 
 
 
 
-export default function AuthForm(props) {
+
+export default function AuthForm() {
     const AuthCtx=useContext(AuthContext);
     // const cartCtx=useContext(CartContext);
     const navigate= useNavigate()
+
+    const dispatch=useDispatch()
+    const isLoggedIn=useSelector(state=>state.auth.isAuthenticated)
 
   
    
@@ -72,10 +78,11 @@ export default function AuthForm(props) {
       }
     })
     .then((data)=>{
-      // console.log(AuthCtx);
-      AuthCtx.login(data.idToken);
+      dispatch(authActions.islogin(data.idToken));
+      console.log(isLoggedIn);
+      // AuthCtx.login(data.idToken);
       
-      AuthCtx.autoLogout();
+      // AuthCtx.autoLogout();
       // console.log(data.idToken);
     navigate('/loggedin')
      })
@@ -103,10 +110,15 @@ export default function AuthForm(props) {
   }
 }
 
-
+useEffect(() => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    dispatch(authActions.islogin(token));
+  } 
+}, []);
 
   return (<Fragment>
-    {!AuthCtx.isLoggedIn && <section className={classes.auth}>
+    {!isLoggedIn && <section className={classes.auth}>
     <h1>{isLogin ? "Login" : "Sign Up"}</h1>
     <form onSubmit={submitHandler}>
       <div className={classes.control}>
@@ -150,7 +162,7 @@ export default function AuthForm(props) {
     
     
   </section> }
-  {AuthCtx.isLoggedIn && <h2 className={classes.loggedInmessage}>You Are already logged in, Visit Product section to see our Products</h2>}
+  {isLoggedIn && <h2 className={classes.loggedInmessage}>You Are already logged in, Visit Product section to see our Products</h2>}
   </Fragment>
   )
 }

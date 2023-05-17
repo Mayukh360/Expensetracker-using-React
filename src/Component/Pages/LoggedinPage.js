@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './LoggedinPage.css';
+import { useDispatch } from 'react-redux';
+import { authActions } from '../../storee/AuthReducer';
 
 export default function LoggedinPage() {
+  const dispatch= useDispatch();
   const email = localStorage.getItem('email');
   const token = localStorage.getItem('token');
   const [isEmailVerified, setIsEmailVerified] = useState(false);
@@ -37,6 +40,13 @@ export default function LoggedinPage() {
   const verificationMessage = isEmailVerified ? (
     <h3>Email is verified</h3>
   ) : <h4>Email is not verified</h4>;
+
+  useEffect(() => {
+    // const token = localStorage.getItem("token");
+    if (token) {
+      dispatch(authActions.islogin(token));
+    } 
+  }, []);
 
   return (
     <div className="logged-in-page bg-gray-100 min-h-screen flex flex-col items-center ">

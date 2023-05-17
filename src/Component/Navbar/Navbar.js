@@ -2,14 +2,23 @@ import React, { Fragment, useContext } from "react";
 import AuthContext from "../../Store/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { authActions } from "../../storee/AuthReducer";
 
 import AuthForm from "../Pages/AuthForm";
 
 export default function Navbar() {
+  const dispatch=useDispatch();
+  const isLoggedIn=useSelector(state=>state.auth.isAuthenticated)
+ 
+ 
   const navigate = useNavigate();
-  const authCtx = useContext(AuthContext);
+  // const authCtx = useContext(AuthContext);
   const logoutHandler = () => {
-    authCtx.logout();
+    dispatch(authActions.islogout());
+
+    // authCtx.logout();
     navigate("/");
   };
   return (
@@ -19,7 +28,7 @@ export default function Navbar() {
           Expense Tracker
         </Link>
         <div>
-          {!authCtx.isLoggedIn && (
+          {!isLoggedIn && (
             <Link
               to="/"
               className="text-white font-medium mr-4 hover:underline"
@@ -27,7 +36,7 @@ export default function Navbar() {
               Login
             </Link>
           )}
-          {authCtx.isLoggedIn && (
+          {isLoggedIn && (
             <button
               onClick={logoutHandler}
               className="text-white font-medium hover:underline"
