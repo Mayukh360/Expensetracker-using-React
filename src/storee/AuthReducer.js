@@ -12,10 +12,11 @@ const authSlice = createSlice({
     },
     islogout(state) {
       state.isAuthenticated = false;
+      state.isPremium = false;
       localStorage.removeItem("token");
     },
     ispremium(state, action) {
-      if (action.payload > 1000) {
+      if (action.payload > 1000 ) {
         state.isPremium = true;
       } else {
         state.isPremium = false;
