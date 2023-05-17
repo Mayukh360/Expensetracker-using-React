@@ -6,6 +6,8 @@ export default function ExpenseTracker() {
   const formRef = useRef();
   const dispatch = useDispatch();
   const [expenses, setExpenses] = useState([]);
+ 
+
 
 
   useEffect(() => {
@@ -168,6 +170,9 @@ export default function ExpenseTracker() {
       (total, expense) => total + parseInt(expense.amount),
       0
     );
+    if(sum){
+      dispatch(authActions.ispremium(sum))
+    }
     // setTotalExpense(sum);
     // console.log(sum)
   

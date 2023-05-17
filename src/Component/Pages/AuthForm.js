@@ -3,7 +3,7 @@ import { useState, useRef, useContext, } from "react";
 import { useNavigate } from 'react-router-dom';
 // import axios from 'axios';
 import classes from "./AuthForm.module.css";
-import AuthContext from '../../Store/AuthContext';
+// import AuthContext from '../../Store/AuthContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { authActions } from '../../storee/AuthReducer';
 
@@ -12,7 +12,7 @@ import { authActions } from '../../storee/AuthReducer';
 
 
 export default function AuthForm() {
-    const AuthCtx=useContext(AuthContext);
+    // const AuthCtx=useContext(AuthContext);
     // const cartCtx=useContext(CartContext);
     const navigate= useNavigate()
 
@@ -20,9 +20,7 @@ export default function AuthForm() {
     const isLoggedIn=useSelector(state=>state.auth.isAuthenticated)
 
   
-   
-
-  const [isLoading, setIsLoading] = useState(false);
+   const [isLoading, setIsLoading] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
   const emailInputRef = useRef();
   const passwordInputRef = useRef();

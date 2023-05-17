@@ -10,6 +10,7 @@ import AuthForm from "../Pages/AuthForm";
 
 export default function Navbar() {
   const dispatch=useDispatch();
+  const isPremium=useSelector(state=>state.auth.isPremium);
   const isLoggedIn=useSelector(state=>state.auth.isAuthenticated)
  
  
@@ -36,6 +37,7 @@ export default function Navbar() {
               Login
             </Link>
           )}
+          
           {isLoggedIn && (
             <button
               onClick={logoutHandler}
@@ -46,6 +48,7 @@ export default function Navbar() {
           )}
         </div>
       </nav>
+     {isPremium && <button>Avail Premium</button>}
     </Fragment>
   );
 }
