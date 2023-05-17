@@ -1,17 +1,14 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../storee/AuthReducer";
-import { useSelector } from "react-redux";
 
-export default function ExpenseTracker() {
+export default function ExpenseTrackerPremium() {
   const formRef = useRef();
   const dispatch = useDispatch();
   const [expenses, setExpenses] = useState([]);
-  const isToggle=useSelector(state=>state.auth.darkToggle)
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    
     if (token) {
       dispatch(authActions.islogin(token));
     }
@@ -27,7 +24,7 @@ export default function ExpenseTracker() {
         }
       })
       .then((data) => {
-        // console.log("USEEFFECT", data);
+        console.log("USEEFFECT", data);
         // console.log(data);
         //Update the data using setAmount and setDescription
         const fetchedExpenses = [];
@@ -175,13 +172,10 @@ export default function ExpenseTracker() {
 
   return (
     <>
-    {isToggle &&<h1>Dark Theme Activated</h1>}
-    {!isToggle&& <div>
       <form
         ref={formRef}
         onSubmit={submitHandler}
-        className= "max-w-x1 mx-auto bg-gradient-to-b from-blue-200 to-purple-700 bg-opacity-75 rounded p-6 shadow-md mt-6"    
-        
+        className="max-w-x1 mx-auto bg-gradient-to-b from-blue-200 to-purple-700 bg-opacity-75 rounded p-6 shadow-md mt-6"
       >
         <label className="block mb-2 font-medium text-gray-800">
           Expense Amount
@@ -226,7 +220,7 @@ export default function ExpenseTracker() {
         {expenses.map((expense) => (
           <li
             key={expense.id}
-            className="max-w-x1 mx-auto mt-6 py-4 px-4 bg-gradient-to-b from-blue-200 to-purple-700 bg-opacity-75 "
+            className="max-w-x1 mx-auto mt-6 py-4 px-4 bg-gradient-to-b from-blue-200 to-purple-700 bg-opacity-75"
           >
             <span className="font-medium">Amount: </span>
             {expense.amount} |{" "}
@@ -253,90 +247,6 @@ export default function ExpenseTracker() {
           </li>
         ))}
       </ul>
-      </div>}
-      {/* ***** */}
-
-      {isToggle&& 
-     <div className="bg-gray-900">
-     <form
-       ref={formRef}
-       onSubmit={submitHandler}
-       className="max-w-x1 mx-auto bg-gradient-to-b from-red-700 to-purple-800 rounded p-6 shadow-md mt-6 bg-gray-800 text-white"
-     >
-       <label className="block mb-2 font-medium">
-         Expense Amount
-       </label>
-       <input
-         type="number"
-         id="amount"
-         className="border bg-gray-700 border-white rounded px-3 py-2 mb-3 w-full text-white"
-       />
-       <label className="block mb-2 font-medium">
-         Expense Description
-       </label>
-       <input
-         type="text"
-         id="description"
-         className="border bg-gray-700 border-white rounded px-3 py-2 mb-3 w-full text-white"
-       />
-       <label className="block mb-2 font-medium">
-         Select Category
-       </label>
-       <select
-         id="category"
-         className="border bg-gray-700 border-white rounded px-3 py-2 mb-3 w-full text-white"
-       >
-         <option value="">Select Category</option>
-         <option value="food">Food</option>
-         <option value="utilities">Utilities</option>
-         <option value="transportation">Transportation</option>
-         <option value="other">Other</option>
-       </select>
-       <button
-         type="submit"
-         className="bg-indigo-600 text-white font-medium py-2 px-4 rounded hover:bg-indigo-700"
-       >
-         Add Expense
-       </button>
-       <div className="text-center mt-4">
-         <span className="text-2xl font-medium bg-indigo-600 px-3 py-3">
-           Total Amount: {sum}
-         </span>
-       </div>
-     </form>
-     <ul className="max-w-x1 mx-auto mt-6">
-       {expenses.map((expense) => (
-         <li
-           key={expense.id}
-           className="max-w-x1 mx-auto mt-6 py-4 px-4 bg-gradient-to-b from-blue-200 to-purple-700 bg-opacity-75 text-white"
-         >
-           <span className="font-medium">Amount: </span>
-           {expense.amount} |{" "}
-           <span className="font-medium">Description: </span>
-           {expense.description} |{" "}
-           <span className="font-medium">Category: </span>
-           {expense.category}
-           <button
-             onClick={() => {
-               dltbtnHandler(expense.id);
-             }}
-             className="ml-2 bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded"
-           >
-             Delete
-           </button>
-           <button
-             onClick={() => {
-               editbtnhandler(expense.id);
-             }}
-             className="ml-2 bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded"
-           >
-             Edit
-           </button>
-         </li>
-       ))}
-     </ul>
-   </div>
-   }
     </>
   );
 }

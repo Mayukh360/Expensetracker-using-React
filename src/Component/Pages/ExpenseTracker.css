@@ -1,0 +1,8 @@
+/* Example CSS for dark theme */
+.dark-theme {
+    background: linear-gradient(to bottom, #615f5f, #3c3838);
+    color: #ffffff;
+  }
+  
+  /* Rest of the styles */
+  

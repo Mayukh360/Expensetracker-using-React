@@ -21,6 +21,10 @@ export default function Navbar() {
     // authCtx.logout();
     navigate("/");
   };
+
+  const toggleHandler=()=>{
+    dispatch(authActions.isToggle());
+  }
   return (
     <Fragment>
       <nav className="flex items-center justify-between bg-gray-900 p-4 border border-gray-300">
@@ -39,7 +43,7 @@ export default function Navbar() {
             </Link>
           )}
           {isPremium && (
-            <button className="text-white font-medium bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:bg-gradient-to-r hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 px-4 py-2 rounded-md mr-4">
+            <button onClick={toggleHandler} className="text-white font-medium bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:bg-gradient-to-r hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 px-4 py-2 rounded-md mr-4">
               <span className="inline-block text-gray-900">Avail Premium</span>
             </button>
           )}

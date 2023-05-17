@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialAuthState = { isAuthenticated: false, isPremium: false };
+const initialAuthState = { isAuthenticated: false, isPremium: false, darkToggle:false };
 
 const authSlice = createSlice({
   name: "authentication",
@@ -21,6 +21,9 @@ const authSlice = createSlice({
       } else {
         state.isPremium = false;
       }
+    },
+    isToggle(state){
+    state.darkToggle=true;
     },
   },
 });
