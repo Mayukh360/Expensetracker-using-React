@@ -49,21 +49,26 @@ export default function LoggedinPage() {
   }, []);
 
   return (
-    <div className="logged-in-page bg-gray-100 min-h-screen flex flex-col items-center ">
-     <div className="bg-white p-8 rounded shadow-md w-full mt-6">
+    <div className="min-h-screen bg-gray-900 flex flex-col items-center py-8">
+    <div className="bg-white p-8 rounded shadow-md w-full max-w-md mt-6">
       <h2 className="text-2xl mb-4">Visit Expense Tracker</h2>
-      <Link to="/expensetracker" className="text-blue-500 underline mb-4">Cick Here to Visit Expense Tracker</Link>
-      </div>
-      <div className="bg-white p-8 mt-4 rounded shadow-md w-full" >
-        <h2 className="text-xl mb-4">You are logged in successfully</h2>
-        <Link to="/updateprofile" className="text-blue-500 underline">Click here to Update Profile</Link><br/>
-      </div>
-      <div className="bg-white p-8 mt-4 rounded shadow-md w-full">
-        <h2 className="text-xl mb-4">Click Here to Verify Email</h2>
-        <button onClick={verifyHandler} className="bg-blue-500 text-white font-medium py-2 px-4 rounded hover:bg-blue-600">Verify Email</button>
-      </div>
-      
-      {verificationMessage}
+      <Link to="/expensetracker" className="text-blue-500 underline mb-4">Click Here to Visit Expense Tracker</Link>
     </div>
+    <div className="bg-white p-8 mt-4 rounded shadow-md w-full max-w-md">
+      <h2 className="text-xl mb-4">You are logged in successfully</h2>
+      <Link to="/updateprofile" className="text-blue-500 underline">Click here to Update Profile</Link><br/>
+    </div>
+    <div className="bg-white p-8 mt-4 rounded shadow-md w-full max-w-md">
+      <h2 className="text-xl mb-4">Click Here to Verify Email</h2>
+      <button onClick={verifyHandler} className="bg-blue-500 text-white font-medium py-2 px-4 rounded hover:bg-blue-600">Verify Email</button>
+    </div>
+    <div className="bg-white p-8 mt-4 rounded shadow-md w-full max-w-md">
+      <h2 className="text-xl mb-4">Verification Status</h2>
+      <div className={isEmailVerified ? 'text-green-500' : 'text-red-500'}>
+        {verificationMessage}
+      </div>
+    </div>
+  </div>
+
   );
 }

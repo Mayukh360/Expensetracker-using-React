@@ -115,7 +115,8 @@ useEffect(() => {
   } 
 }, []);
 
-  return (<Fragment>
+  return (
+  <div >
     {!isLoggedIn && <section className={classes.auth}>
     <h1>{isLogin ? "Login" : "Sign Up"}</h1>
     <form onSubmit={submitHandler}>
@@ -161,6 +162,6 @@ useEffect(() => {
     
   </section> }
   {isLoggedIn && <h2 className={classes.loggedInmessage}>You Are already logged in, Visit Product section to see our Products</h2>}
-  </Fragment>
+  </div>
   )
 }

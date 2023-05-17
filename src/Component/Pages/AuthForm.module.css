@@ -1,3 +1,15 @@
+/* .overall{
+  background-image: url("https://images.unsplash.com/photo-1553787762-b5f5721f3270?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
+  background-size: cover;
+} */
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url("https://static.vecteezy.com/system/resources/previews/001/984/880/original/abstract-colorful-geometric-overlapping-background-and-texture-free-vector.jpg");
+  background-size: cover;
+}
+
+
 .auth {
     margin: 3rem auto;
     width: 95%;
@@ -8,7 +20,7 @@
     padding: 1rem;
     text-align: center;
   }
-  
+
   .auth h1 {
     text-align: center;
     color: white;

@@ -6,9 +6,6 @@ export default function ExpenseTracker() {
   const formRef = useRef();
   const dispatch = useDispatch();
   const [expenses, setExpenses] = useState([]);
- 
-
-
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -101,12 +98,10 @@ export default function ExpenseTracker() {
       .catch((error) => {
         console.log("Error occurred while fetching expenses data:", error);
       });
-
-
   }
 
   const dltbtnHandler = (expenseId) => {
-      setExpenses((prevExpenses) =>
+    setExpenses((prevExpenses) =>
       prevExpenses.filter((expense) => expense.id !== expenseId)
     );
     fetch(
@@ -115,7 +110,6 @@ export default function ExpenseTracker() {
         method: "DELETE",
       }
     )
-    
       .then((response) => {
         if (response.ok) {
           console.log("Expense deleted successfully!");
@@ -134,7 +128,7 @@ export default function ExpenseTracker() {
       });
   };
   const editbtnhandler = (expenseId) => {
-  //   findind the specific object  which needs to populate
+    //   findind the specific object  which needs to populate
     const expenseToEdit = expenses.find((expense) => expense.id === expenseId);
     if (expenseToEdit) {
       formRef.current.elements.amount.value = expenseToEdit.amount;
@@ -142,8 +136,8 @@ export default function ExpenseTracker() {
       formRef.current.elements.category.value = expenseToEdit.category;
 
       setExpenses((prevExpenses) =>
-              prevExpenses.filter((expense) => expense.id !== expenseId)
-            );
+        prevExpenses.filter((expense) => expense.id !== expenseId)
+      );
       fetch(
         `https://authanticate-form-default-rtdb.firebaseio.com/user/expenses/${expenseId}.json`,
         {
@@ -165,24 +159,23 @@ export default function ExpenseTracker() {
         });
     }
   };
-  
-    const sum = expenses.reduce(
-      (total, expense) => total + parseInt(expense.amount),
-      0
-    );
-    if(sum){
-      dispatch(authActions.ispremium(sum))
-    }
-    // setTotalExpense(sum);
-    // console.log(sum)
-  
+
+  const sum = expenses.reduce(
+    (total, expense) => total + parseInt(expense.amount),
+    0
+  );
+  if (sum) {
+    dispatch(authActions.ispremium(sum));
+  }
+  // setTotalExpense(sum);
+  // console.log(sum)
 
   return (
     <>
       <form
         ref={formRef}
         onSubmit={submitHandler}
-        className="max-w-x1 mx-auto bg-white rounded p-6 shadow-md mt-6"
+        className="max-w-x1 mx-auto bg-gradient-to-b from-blue-200 to-purple-700 bg-opacity-75 rounded p-6 shadow-md mt-6"
       >
         <label className="block mb-2 font-medium text-gray-800">
           Expense Amount
@@ -215,14 +208,20 @@ export default function ExpenseTracker() {
         </select>
         <button
           type="submit"
-          className="bg-blue-500 text-white font-medium py-2 px-4 rounded hover:bg-blue-600"
+          className="bg-cyan-500 text-white font-medium py-2 px-4 rounded hover:bg-green-800"
         >
           Add Expense
-        </button>  <li>{sum}</li>
+        </button>
+        <div className="text-center mt-4 ">
+          <span className="text-2xl font-medium text-gray-100 bg-green-600 px-3 py-3">Total Amount :{sum}</span>
+        </div>
       </form>
       <ul className="max-w-x1 mx-auto mt-6">
         {expenses.map((expense) => (
-          <li key={expense.id} className="bg-white shadow-md rounded p-4 mb-4">
+          <li
+            key={expense.id}
+            className="max-w-x1 mx-auto mt-6 py-4 px-4 bg-gradient-to-b from-blue-200 to-purple-700 bg-opacity-75"
+          >
             <span className="font-medium">Amount: </span>
             {expense.amount} |{" "}
             <span className="font-medium">Description: </span>
@@ -248,7 +247,6 @@ export default function ExpenseTracker() {
           </li>
         ))}
       </ul>
-     
     </>
   );
 }
