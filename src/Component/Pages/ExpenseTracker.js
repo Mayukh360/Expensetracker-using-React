@@ -7,6 +7,7 @@ export default function ExpenseTracker() {
   const dispatch = useDispatch();
   const [expenses, setExpenses] = useState([]);
 
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -98,6 +99,8 @@ export default function ExpenseTracker() {
       .catch((error) => {
         console.log("Error occurred while fetching expenses data:", error);
       });
+
+
   }
 
   const dltbtnHandler = (expenseId) => {
@@ -160,6 +163,14 @@ export default function ExpenseTracker() {
         });
     }
   };
+  
+    const sum = expenses.reduce(
+      (total, expense) => total + parseInt(expense.amount),
+      0
+    );
+    // setTotalExpense(sum);
+    // console.log(sum)
+  
 
   return (
     <>
@@ -202,7 +213,7 @@ export default function ExpenseTracker() {
           className="bg-blue-500 text-white font-medium py-2 px-4 rounded hover:bg-blue-600"
         >
           Add Expense
-        </button>
+        </button>  <li>{sum}</li>
       </form>
       <ul className="max-w-x1 mx-auto mt-6">
         {expenses.map((expense) => (
@@ -232,6 +243,7 @@ export default function ExpenseTracker() {
           </li>
         ))}
       </ul>
+     
     </>
   );
 }
