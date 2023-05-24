@@ -16,7 +16,7 @@ function App() {
       <Navbar/>
       <Routes>
       {/* <Route path="/login" element={<AuthForm />} /> */}
-      <Route path="/" element={<AuthForm />} />
+      <Route path="/Expensetracker-using-React" element={<AuthForm />} />
       <Route path="/loggedin" element={<LoggedinPage />} />
       <Route path="/updateprofile" element={<UpdateProfile/>} />
      {isLoggedIn ? ( <Route path="/expensetracker" element={<ExpenseTracker/>} />) :(<Route path="/expensetracker" element={<AuthForm/>} />)}

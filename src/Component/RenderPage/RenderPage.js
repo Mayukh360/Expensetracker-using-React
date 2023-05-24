@@ -8,7 +8,7 @@ import ExpenseTracker from '../Pages/ExpenseTracker'
 const router=createBrowserRouter([
     {path:'/loggedin', element: <LoggedinPage/>},
     // {path:'/login', element: <AuthForm/>},
-    {path:'/', element: <AuthForm/>},
+    {path:'/Expensetracker-using-React', element: <AuthForm/>},
     {path:'/updateprofile', element: <UpdateProfile/>},
     {path:'/expensetracker', element: <ExpenseTracker/>},
 ])
