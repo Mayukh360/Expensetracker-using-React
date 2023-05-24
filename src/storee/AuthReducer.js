@@ -23,7 +23,7 @@ const authSlice = createSlice({
       }
     },
     isToggle(state){
-    state.darkToggle=true;
+    state.darkToggle=!state.darkToggle;
     },
   },
 });

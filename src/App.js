@@ -4,14 +4,13 @@ import LoggedinPage from "./Component/Pages/LoggedinPage";
 import UpdateProfile from "./Component/Pages/UpdateProfile";
 import Navbar from "./Component/Navbar/Navbar";
 import ExpenseTracker from "./Component/Pages/ExpenseTracker";
-import { useContext } from "react";
-import AuthContext from "./Store/AuthContext";
+
 import { useSelector } from "react-redux";
 
 
 function App() {
   const isLoggedIn=useSelector(state=>state.auth.isAuthenticated)
-  const authCtx=useContext(AuthContext);
+  
   return (
     <div >
       <Navbar/>

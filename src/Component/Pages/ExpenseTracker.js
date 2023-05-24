@@ -2,13 +2,15 @@ import React, { useRef, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../storee/AuthReducer";
 import { useSelector } from "react-redux";
+import './ExpenseTracker.css'
 
 export default function ExpenseTracker() {
   const formRef = useRef();
   const dispatch = useDispatch();
   const [expenses, setExpenses] = useState([]);
   const isToggle = useSelector((state) => state.auth.darkToggle);
-
+  const enteredEmail=localStorage.getItem('email');
+  const changedemail = enteredEmail.replace("@", "").replace(".", "");
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -17,7 +19,7 @@ export default function ExpenseTracker() {
     }
     // Fetch expenses data from Firebase Realtime Database
     fetch(
-      "https://authanticate-form-default-rtdb.firebaseio.com/user/expenses.json"
+      `https://authanticate-form-default-rtdb.firebaseio.com/user/${changedemail}.json`
     )
       .then((response) => {
         if (response.ok) {
@@ -48,6 +50,7 @@ export default function ExpenseTracker() {
 
   async function submitHandler(event) {
     event.preventDefault();
+   
     const amountInput = formRef.current.elements.amount.value;
     const descriptionInput = formRef.current.elements.description.value;
     const categoryInput = formRef.current.elements.category.value;
@@ -63,7 +66,7 @@ export default function ExpenseTracker() {
     // setExpenses((prevExpenses) => [...prevExpenses, expenseData]);
 
     await fetch(
-      "https://authanticate-form-default-rtdb.firebaseio.com/user/expenses.json",
+      `https://authanticate-form-default-rtdb.firebaseio.com/user/${changedemail}.json`,
       {
         method: "POST",
         body: JSON.stringify(expenseData),
@@ -74,7 +77,7 @@ export default function ExpenseTracker() {
     );
 
     fetch(
-      "https://authanticate-form-default-rtdb.firebaseio.com/user/expenses.json"
+      `https://authanticate-form-default-rtdb.firebaseio.com/user/${changedemail}.json`
     )
       .then((response) => {
         if (response.ok) {
@@ -104,11 +107,12 @@ export default function ExpenseTracker() {
   }
 
   const dltbtnHandler = (expenseId) => {
+    console.log("ID",expenseId);
     setExpenses((prevExpenses) =>
       prevExpenses.filter((expense) => expense.id !== expenseId)
     );
     fetch(
-      `https://authanticate-form-default-rtdb.firebaseio.com/user/expenses/${expenseId}.json`,
+      `https://authanticate-form-default-rtdb.firebaseio.com/user/${changedemail}.json`,
       {
         method: "DELETE",
       }
@@ -142,7 +146,7 @@ export default function ExpenseTracker() {
         prevExpenses.filter((expense) => expense.id !== expenseId)
       );
       fetch(
-        `https://authanticate-form-default-rtdb.firebaseio.com/user/expenses/${expenseId}.json`,
+        `https://authanticate-form-default-rtdb.firebaseio.com/user/${changedemail}.json`,
         {
           method: "DELETE",
         }
@@ -167,6 +171,7 @@ export default function ExpenseTracker() {
     (total, expense) => total + parseInt(expense.amount),
     0
   );
+
   if (sum) {
     dispatch(authActions.ispremium(sum));
   }
@@ -190,7 +195,12 @@ export default function ExpenseTracker() {
 
   return (
     <>
-      {isToggle && <h1>Dark Theme Activated</h1>}
+      {isToggle && (
+        <h1 className="text-white bg-gray-900 py-4 text-center  font-bold">
+          Dark Theme Activated
+        </h1>
+      )}
+
       {/* <button
         onClick={downloadExpensesAsTxt}
         className="bg-blue-500 text-white font-medium py-2 px-4 rounded"
@@ -282,14 +292,13 @@ export default function ExpenseTracker() {
       {/* ***** */}
 
       {isToggle && (
-        
         <div className="bg-gray-900">
-           <button
-        onClick={downloadExpensesAsTxt}
-        className="bg-blue-500 text-white font-medium py-2 px-4 rounded"
-      >
-        Download File
-      </button>
+          <button
+            onClick={downloadExpensesAsTxt}
+            className="bg-purple-600 text-white font-medium py-2 px-4 rounded"
+          >
+            Download File
+          </button>
           <form
             ref={formRef}
             onSubmit={submitHandler}
