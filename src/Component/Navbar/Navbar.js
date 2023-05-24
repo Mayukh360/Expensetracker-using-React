@@ -16,7 +16,7 @@ export default function Navbar() {
     dispatch(authActions.islogout());
 
     // authCtx.logout();
-    navigate("/");
+    navigate("/Expensetracker-using-React");
   };
 
   const toggleHandler = () => {
@@ -31,7 +31,7 @@ export default function Navbar() {
         <div>
           {!isLoggedIn && (
             <Link
-              to="/"
+              to="/Expensetracker-using-React"
               className="text-white font-medium mr-4 hover:underline"
             >
               <button className="text-white font-medium hover:underline px-4 py-2 rounded-md bg-gray-800">
