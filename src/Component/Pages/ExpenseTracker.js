@@ -19,7 +19,7 @@ export default function ExpenseTracker() {
     }
     // Fetch expenses data from Firebase Realtime Database
     fetch(
-      `https://authanticate-form-default-rtdb.firebaseio.com/user/${changedemail}.json`
+      `https://redux-toolkit-e5a54-default-rtdb.firebaseio.com/user/${changedemail}.json`
     )
       .then((response) => {
         if (response.ok) {
@@ -66,7 +66,7 @@ export default function ExpenseTracker() {
     // setExpenses((prevExpenses) => [...prevExpenses, expenseData]);
 
     await fetch(
-      `https://authanticate-form-default-rtdb.firebaseio.com/user/${changedemail}.json`,
+      `https://redux-toolkit-e5a54-default-rtdb.firebaseio.com/user/${changedemail}.json`,
       {
         method: "POST",
         body: JSON.stringify(expenseData),
@@ -77,7 +77,7 @@ export default function ExpenseTracker() {
     );
 
     fetch(
-      `https://authanticate-form-default-rtdb.firebaseio.com/user/${changedemail}.json`
+      `https://redux-toolkit-e5a54-default-rtdb.firebaseio.com/user/${changedemail}.json`
     )
       .then((response) => {
         if (response.ok) {
@@ -112,7 +112,7 @@ export default function ExpenseTracker() {
       prevExpenses.filter((expense) => expense.id !== expenseId)
     );
     fetch(
-      `https://authanticate-form-default-rtdb.firebaseio.com/user/${changedemail}.json`,
+      `https://redux-toolkit-e5a54-default-rtdb.firebaseio.com/user/${changedemail}/${expenseId}.json`,
       {
         method: "DELETE",
       }
@@ -146,7 +146,7 @@ export default function ExpenseTracker() {
         prevExpenses.filter((expense) => expense.id !== expenseId)
       );
       fetch(
-        `https://authanticate-form-default-rtdb.firebaseio.com/user/${changedemail}.json`,
+        `https://redux-toolkit-e5a54-default-rtdb.firebaseio.com/user/${changedemail}/${expenseId}.json`,
         {
           method: "DELETE",
         }

@@ -38,10 +38,10 @@ export default function AuthForm() {
       let url;
       if (isLogin) {
         url =
-          "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDXx5szR2zhd9OQlqBegt7PJUE8RXQAqAk";
+          "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCIcUCMaO5hHVJlbK7pso9z86iimfWHmpM";
       } else {
         url =
-          "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDXx5szR2zhd9OQlqBegt7PJUE8RXQAqAk";
+          "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCIcUCMaO5hHVJlbK7pso9z86iimfWHmpM";
       }
       fetch(url, {
         method: "POST",
@@ -85,7 +85,7 @@ export default function AuthForm() {
         requestType: "PASSWORD_RESET",
       };
       fetch(
-        "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyDXx5szR2zhd9OQlqBegt7PJUE8RXQAqAk",
+        "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyCIcUCMaO5hHVJlbK7pso9z86iimfWHmpM",
         {
           method: "POST",
           body: JSON.stringify(data),
